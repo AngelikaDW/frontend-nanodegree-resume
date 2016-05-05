@@ -22,11 +22,12 @@ h6 {
 .work-entry,
 .project-entry {
   padding: 0 5%;
+
 }
 
 h1 {
   font-size: 40px;
-  color: #f5a623;
+  color: #3E423A;
   line-height: 48px;
   display: inline;
 }
@@ -100,16 +101,16 @@ a {
 }
 
 #skills-h3 {
-  color: #f5ae23;
+  color: #3E423A;
   display: none;
 }
 
 .orange {
-  background-color: #f5ae23;
+  background-color: #3E8C84;
 }
 
 .orange-text {
-  color: #f5ae23;
+  color: #3E423A;
 }
 
 .white-text {
@@ -124,12 +125,12 @@ a {
 }
 
 .dark-gray {
-  background-color: #4a4a4a;
+  background-color: #3E8C84;
 }
 
 /* TODO: Replace with image later */
 #header {
-  background-color: #484848;
+  background-color: #3E8C84;
 }
 
 .flex-box {
