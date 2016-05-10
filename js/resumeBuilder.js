@@ -1,7 +1,7 @@
 
 var bio = {
     "name": "Angelika Dietrich-Winkler",
-    "role": "Marketing professional - Aspiring Back-end developer",
+    "role": "expierenced marketing professional - rookie back-end developer",
     "contacts":
         {
         "mobile": "+31 6 38128082",
@@ -10,19 +10,19 @@ var bio = {
         "twitter": "Nav",
         "location": "Amsterdam, The Netherlands"
         },
-    "welcome": "I am an international experienced marketing professional with strong experience and proven track record in insight-led product and marketing innovations and strategic business development.",
+    "welcomeMessage": "Marketing professional with strong experience and proven track record in insight-led product and marketing innovations and strategic business development. Rookie back-end developer. Aspiring linking pin between marketing and development",
     "skills":
         [
-        "selfstarter", "thinking big and getting things done", "international experienced", "python", "ready for new challenges"
+        "python", "international experienced marketing professional", "linking pin between marketing and deve", "thinking big and getting things done", "ready for new challenges"
         ],
-    "bioPic": "images/angelika.jpg"
+    "biopic": "images/angelika.jpg"
 };
 
 var work = {
     "jobs": [
         {
-        "title": "Director Consumer Marketing",
         "employer": "Philips",
+        "title": "Director Consumer Marketing",
         "dates": "2011 - 2016",
         "location": "Amsterdam",
         "description": "Leading category ‘New Cleaning Value Spaces’: wet, steam, cordless and robotics cleaning appliances. Identifying future consumer trends and needs, translating them into product roadmaps and strategic marketing plans. Managing a team of  4 up- and downstream marketing managers. Leading multidisciplinary teams (design, engineers, quality, researchers) in developing propositions and managing product launches in different markets.All go-to-market activities for product and marketing innovations"
@@ -50,7 +50,7 @@ var education = {
         "location": "Vienna, Austria",
         "dates": "2000 - 2004",
         "degree": "Ph.D.",
-        "major": "Business economics",
+        "major": ["Business economics"],
         "url": "http://www.wu-wien.ac.at"
     },
    {
@@ -58,7 +58,7 @@ var education = {
         "location": "Wiener Neustadt, Austria",
         "dates": "1996 - 2000",
         "degree": "Master",
-        "major": "Business consultancy",
+        "major": ["Business consultancy"],
         "url": "http://www.fhwn.ac.at"
     }
     ],
@@ -96,52 +96,55 @@ var projects = {
     ]
 };
 
-var formattedName = HTMLheaderName.replace("%data%", bio.name);
-var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
-$("#header").prepend(formattedName, formattedRole);
+bio.display = function () {
+    var formattedName = HTMLheaderName.replace("%data%", bio.name);
+    var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
+    $("#header").prepend(formattedName, formattedRole);
 
-var formattedContactInfo = [];
-formattedContactInfo.push(HTMLemail.replace("%data%", bio.contacts.email));
-formattedContactInfo.push(HTMLgithub.replace("%data%", bio.contacts.github));
-// formattedContactInfo.push(HTMLtwitter.replace("%data%", bio.contacts.twitter));
-formattedContactInfo.push(HTMLlocation.replace("%data%", bio.contacts.location));
+    var formattedContactInfo = [];
+    formattedContactInfo.push(HTMLemail.replace("%data%", bio.contacts.email));
+    formattedContactInfo.push(HTMLgithub.replace("%data%", bio.contacts.github));
+    // formattedContactInfo.push(HTMLtwitter.replace("%data%", bio.contacts.twitter));
+    formattedContactInfo.push(HTMLlocation.replace("%data%", bio.contacts.location));
 
-for(i in formattedContactInfo) {
-    $("#topContacts").append(formattedContactInfo[i]);
-    $("#footerContacts").append(formattedContactInfo[i]);
-}
-
-var formattedBioPic = HTMLbioPic.replace("%data%", bio.bioPic);
-$("#header").append(formattedBioPic);
+    for (var i=0; i <formattedContactInfo.length; i++) {
+     $("#topContacts, #footerContacts").append(formattedContactInfo[i])
+    };
 
 
-if (bio.skills.length > 0) {
- $("#header").append(HTMLskillsStart);
- var formattedSkill = HTMLskills.replace("%data%", bio.skills[0]);
- $("#skills").append(formattedSkill);
-  var formattedSkill = HTMLskills.replace("%data%", bio.skills[1]);
- $("#skills").append(formattedSkill);
-  var formattedSkill = HTMLskills.replace("%data%", bio.skills[2]);
- $("#skills").append(formattedSkill);
-  var formattedSkill = HTMLskills.replace("%data%", bio.skills[3]);
- $("#skills").append(formattedSkill)
+    var formattedBioPic = HTMLbioPic.replace("%data%", bio.biopic);
+    $("#header").append(formattedBioPic);
+
+    var formattedWelcomeMessage = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
+    $("#header").append(formattedWelcomeMessage);
+
+    if(bio.skills.length > 0) {
+        $("#header").append(HTMLskillsStart);
+        for(i in bio.skills) {
+            $("#header").append(HTMLskills.replace("%data%", bio.skills[i]));
+        }
+    }
 };
 
-function displayWork(){
-for (job in work.jobs){
-    $("#workExperience").append(HTMLworkStart);
-    var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
-    var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
-    var formattedEmployerTitle = formattedEmployer + formattedTitle;
-    var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
-    var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+bio.display();
 
-    $(".work-entry:last").append(formattedEmployerTitle);
-    $(".work-entry:last").append(formattedDates);
-    $(".work-entry:last").append(formattedDescription);
-}
+work.display = function() {
+    if(work.jobs.length > 0) {
+        $("#workExperience").append(HTMLworkStart);
+        for (job in work.jobs){
+            var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+            var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+            var formattedEmployerTitle = formattedEmployer + formattedTitle;
+            var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+            var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+
+            $(".work-entry:last").append(formattedEmployerTitle);
+            $(".work-entry:last").append(formattedDates);
+            $(".work-entry:last").append(formattedDescription);
+        }
+    }
 };
-displayWork();
+work.display();
 
 projects.display = function() {
     if(projects.projects.length > 0) {
@@ -160,8 +163,6 @@ projects.display = function() {
                 var formattedProjectImage = HTMLprojectImage.replace("%data%", projects.projects[i].images[img]);
                 $(".project-entry:last").append(formattedProjectImage);
             }
-
-
         }
     }
 };
