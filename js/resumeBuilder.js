@@ -1,4 +1,3 @@
-
 var bio = {
     "name": "Angelika Dietrich-Winkler",
     "role": "expierenced marketing professional - rookie back-end developer",
@@ -12,10 +11,44 @@ var bio = {
         },
     "welcomeMessage": "Marketing professional with strong experience and proven track record in insight-led product and marketing innovations and strategic business development. Rookie back-end developer. Aspiring linking pin between marketing and development",
     "skills":
-        [
-        "python", "international experienced marketing professional", "linking pin between marketing and deve", "thinking big and getting things done", "ready for new challenges"
+        ["python", "experienced marketing professional", "linking pin between marketing and development", "thinking big and getting things done", "ready for new challenges", "multilangual"
         ],
     "biopic": "images/angelika.jpg"
+};
+
+var education = {
+    "schools": [
+    {
+        "name": "Wirtschaftsuniversitaet Wien",
+        "location": "Vienna, Austria",
+        "degree": "Ph.D.",
+        "major": ["Business economics"],
+        "dates": "2000 - 2004",
+        "url": "http://www.wu-wien.ac.at"
+    },
+   {
+        "name": "University of applied Sciences FHWN",
+        "location": "Wiener Neustadt, Austria",
+        "degree": "Master",
+        "major": ["Business consultancy"],
+        "dates": "1996 - 2000",
+        "url": "http://www.fhwn.ac.at"
+    }
+    ],
+    "onlineCourses": [
+    {
+        "title": "JavaScript Syntax",
+        "school": "Udacity",
+        "date": "2016",
+        "url": "http://www.udacity.com"
+    },
+    {
+        "title": "Python for Informatics",
+        "school": "MIT",
+        "date": "2016",
+        "url": "http://coursera.org"
+    }
+    ]
 };
 
 var work = {
@@ -23,15 +56,15 @@ var work = {
         {
         "employer": "Philips",
         "title": "Director Consumer Marketing",
-        "dates": "2011 - 2016",
         "location": "Amsterdam",
+        "dates": "2011 - 2016",
         "description": "Leading category ‘New Cleaning Value Spaces’: wet, steam, cordless and robotics cleaning appliances. Identifying future consumer trends and needs, translating them into product roadmaps and strategic marketing plans. Managing a team of  4 up- and downstream marketing managers. Leading multidisciplinary teams (design, engineers, quality, researchers) in developing propositions and managing product launches in different markets.All go-to-market activities for product and marketing innovations"
         },
         {
         "title": "Senior Consumer Intelligence Manager",
         "employer": "Philips",
-        "dates": "2007-2011",
         "location": "Shanghai",
+        "dates": "2007-2011",
         "description": "Creating consumer and market insights"
         },
         {
@@ -43,40 +76,7 @@ var work = {
         }
     ]
 };
-var education = {
-    "schools": [
-    {
-        "name": "Wirtschaftsuniversitaet Wien",
-        "location": "Vienna, Austria",
-        "dates": "2000 - 2004",
-        "degree": "Ph.D.",
-        "major": ["Business economics"],
-        "url": "http://www.wu-wien.ac.at"
-    },
-   {
-        "name": "University of applied Sciences FHWN",
-        "location": "Wiener Neustadt, Austria",
-        "dates": "1996 - 2000",
-        "degree": "Master",
-        "major": ["Business consultancy"],
-        "url": "http://www.fhwn.ac.at"
-    }
-    ],
-    "onlineCourses": [
-    {
-        "title": "JavaScript Syntax",
-        "school": "Udacity",
-        "dates": "2016",
-        "url": "http://www.udacity.com"
-    },
-    {
-        "title": "Python for Informatics",
-        "school": "MIT",
-        "dates": "2016",
-        "url": "http://coursera.org"
-    }
-    ]
-};
+
 
 var projects = {
     "projects": [
@@ -84,14 +84,23 @@ var projects = {
         "title": "Drinking Fountains",
         "dates": "2016",
         "description": "Website to find the nearest drinking fountain around Amsterdam. Based on an automated Python database.",
-        "url":"nav"
-        // "images": "images/water.png"
+        "url":"nav",
+        "images": [
+        // I am aware that those are local links to images not url but the site is offline at the moment.
+            "images/water.png",
+            "images/tap_drop.png"
+        ]
     },
     {
         "title": "Marnixplantsoen",
         "dates": "2016",
         "description": "Website to lobby for an upgrade of a public park in Amsterdam.",
-        "url": "nav"
+        "url": "nav",
+        "images": [
+        // I am aware that those are local links to images not url but the site is offline at the moment.
+            "images/marnixpl_new.jpg",
+            "images/marnix2.png"
+        ]
     }
     ]
 };
@@ -107,10 +116,9 @@ bio.display = function () {
     // formattedContactInfo.push(HTMLtwitter.replace("%data%", bio.contacts.twitter));
     formattedContactInfo.push(HTMLlocation.replace("%data%", bio.contacts.location));
 
-    for (var i=0; i <formattedContactInfo.length; i++) {
-     $("#topContacts, #footerContacts").append(formattedContactInfo[i])
-    };
-
+    for (var contactItem=0; contactItem <formattedContactInfo.length; contactItem++) {
+     $("#topContacts, #footerContacts").append(formattedContactInfo[contactItem]);
+    }
 
     var formattedBioPic = HTMLbioPic.replace("%data%", bio.biopic);
     $("#header").append(formattedBioPic);
@@ -119,19 +127,19 @@ bio.display = function () {
     $("#header").append(formattedWelcomeMessage);
 
     if(bio.skills.length > 0) {
-        $("#header").append(HTMLskillsStart);
-        for(i in bio.skills) {
-            $("#header").append(HTMLskills.replace("%data%", bio.skills[i]));
+        $("#skills").append(HTMLskillsStart);
+        for(var skill=0; skill<bio.skills.length; skill++) {
+            $("#skills").append(HTMLskills.replace("%data%", bio.skills[skill]));
         }
     }
-};
+}
 
 bio.display();
 
 work.display = function() {
     if(work.jobs.length > 0) {
         $("#workExperience").append(HTMLworkStart);
-        for (job in work.jobs){
+        for(var job = 0; job < work.jobs.length; job++){
             var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
             var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
             var formattedEmployerTitle = formattedEmployer + formattedTitle;
@@ -143,65 +151,70 @@ work.display = function() {
             $(".work-entry:last").append(formattedDescription);
         }
     }
-};
+}
 work.display();
 
 projects.display = function() {
     if(projects.projects.length > 0) {
-        for(i in projects.projects) {
+        for(var project=0; project < projects.projects.length; project++) {
             $("#projects").append(HTMLprojectStart);
 
-            var formattedProjectTitle = HTMLprojectTitle.replace("%data%", projects.projects[i].title).replace("#", projects.projects[i].url);
-            var formattedProjectDates = HTMLprojectDates.replace("%data%", projects.projects[i].dates);
-            var formattedProjectDescription = HTMLprojectDescription.replace("%data%", projects.projects[i].description);
+            var formattedProjectTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title).replace("#", projects.projects[project].url);
+            var formattedProjectDates = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
+            var formattedProjectDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
 
             $(".project-entry:last").append(formattedProjectTitle);
             $(".project-entry:last").append(formattedProjectDates);
             $(".project-entry:last").append(formattedProjectDescription);
 
-            for(img in projects.projects[i].images) {
-                var formattedProjectImage = HTMLprojectImage.replace("%data%", projects.projects[i].images[img]);
+            for(img in projects.projects[project].images) {
+                var formattedProjectImage = HTMLprojectImage.replace("%data%", projects.projects[project].images[img]);
                 $(".project-entry:last").append(formattedProjectImage);
             }
         }
     }
-};
+}
 
 projects.display();
 
 education.display = function() {
     if(education.schools.length > 0) {
-        for(i in education.schools) {
+        $(".education-entry:last").append(HTMLonlineClasses);
+        for(var school =0; school < education.schools.length; school++) {
             $("#education").append(HTMLschoolStart);
 
-            var formattedSchoolName = HTMLschoolName.replace("%data%", education.schools[i].name).replace("#", education.schools[i].url);
-            var formattedSchoolDates = HTMLschoolDates.replace("%data%", education.schools[i].dates);
-            var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", education.schools[i].location);
-            var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", education.schools[i].degree);
-            var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", education.schools[i].major);
+            var formattedSchoolName = HTMLschoolName.replace("%data%", education.schools[school].name).replace("#", education.schools[school].url);
+            var formattedSchoolDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
+            var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", education.schools[school].location);
+            var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
+            var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", education.schools[school].major);
+            var formattedSchoolNameDegree = formattedSchoolName +" " + formattedSchoolDegree;
 
-            $(".education-entry:last").append(formattedSchoolName);
+            $(".education-entry:last").append(formattedSchoolNameDegree);
             $(".education-entry:last").append(formattedSchoolDates);
             $(".education-entry:last").append(formattedSchoolLocation);
-            $(".education-entry:last").append(formattedSchoolDegree);
             $(".education-entry:last").append(formattedSchoolMajor);
         }
-    };
+    }
+
     if(education.onlineCourses.length > 0) {
-        for(i in education.onlineCourses) {
+        $(".education-entry:last").append(HTMLonlineClasses);
+        for(var course=0; course< education.onlineCourses.length; course++) {
             $("#education").append(HTMLschoolStart);
 
-            var formattedOnlineCourseName = HTMLonlineTitle.replace("%data%", education.onlineCourses[i].title).replace("#", education.onlineCourses[i].url);
-            var formattedOnlineCourseSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[i].school);
-            var formattedOnlineCourseDates = HTMLonlineDates.replace("%data%", education.onlineCourses[i].dates);
-            var formattedOnlineCourseURL = HTMLonlineURL.replace("%data%", education.onlineCourses[i].url);
-            $(".education-entry:last").append(formattedOnlineCourseName);
-            $(".education-entry:last").append(formattedOnlineCourseSchool);
+            var formattedOnlineCourseTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[course].title).replace("#", education.onlineCourses[course].url);
+            var formattedOnlineCourseSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[course].school);
+            var formattedOnlineCourseDates = HTMLonlineDates.replace("%data%", education.onlineCourses[course].date);
+            var formattedOnlineCourseURL = HTMLonlineURL.replace("%data%", education.onlineCourses[course].url);
+            var formattedOnlineTitleSchool = formattedOnlineCourseTitle + " "+ formattedOnlineCourseSchool;
+
+            // $(".education-entry:last").append(formattedOnlineCourseName);
+            $(".education-entry:last").append(formattedOnlineTitleSchool);
             $(".education-entry:last").append(formattedOnlineCourseDates);
             $(".education-entry:last").append(formattedOnlineCourseURL);
         }
     }
-};
+}
 
 education.display();
 
@@ -210,8 +223,9 @@ function inName(name){
     console.log(name);
     name[1] = name[1].toUpperCase();
     name[0] = name[0].slice(0,1).toUpperCase() + name[0].slice(1).toLowerCase();
-    return name[0] +" "+name[1];
-};
+    return name[0] +" "+name[1]
+}
+
 $("#main").append(internationalizeButton);
 
 
@@ -235,7 +249,7 @@ projects.display = function() {
             }
         }
     }
-};
+}
 
 $("#mapDiv").append(googleMap);
 
